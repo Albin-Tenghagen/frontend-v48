@@ -7,12 +7,18 @@ console.log("JavaScript loaded correctly")
 // Använd en callback för att meddela när loggningen är klar.
 let stringToDisplay = "Denna sträng ska visas"
 
-function delayLog(stringToDisplay){
+function delayLog(stringToDisplay, delayTime, callback){
     setTimeout(() => {
-        callback(`${stringToDisplay}, visas nu 2 sekunder efter initieringen`)
-    }, 2000)
+        console.log(stringToDisplay)
+        callback()
+    }, delayTime)
 }
-delayLog()
+
+function logCompleted() {
+    console.log("loggningen är klar")
+}
+
+delayLog(stringToDisplay, 2000, logCompleted)
 // Mål:
 // Förstå hur man använder callbacks med setTimeout.
 // Praktisera enkel asynkronitet.
@@ -21,6 +27,55 @@ delayLog()
 
 // Uppgift:
 // Använd fetch() för att hämta en användare från https://jsonplaceholder.typicode.com/users/1.
+
+function fetchAUser(url, callback) {
+  fetch(url)
+  .then(response => {
+    if(!response.ok){
+        throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+
+    console.log(`${response.status}`)
+    return response.json()
+  })
+.then(data => {
+
+    callback(null, data)
+})
+.catch((err) => {
+    callback(err)
+    document.body.innerHTML = `<p>Sorry an error occured: ${err}</p>`
+});
+}
+
+fetchAUser('https://jsonplaceholder.typicode.com/users/2', (err,data) => {
+    if(err) {
+        console.log("error", err)
+    } else {
+        console.log("data", data)
+        const userId = data.id;
+        console.log("userId:", userId)
+        fetchUserPosts('https://jsonplaceholder.typicode.com/posts?userId=${userId}')
+    }
+})
+
+function fetchUserPosts(url) {
+    fetch(url)
+    .then(response => {
+        if(!response.ok){
+            throw new Error (`HTTP-fel! status: ${response.status}`)
+        }
+        console.log(`response status: ${response.status}`)
+        return response.json()
+    })
+    .then(posts => {
+       console.log("user Posts", posts)
+    })
+    .catch(err => {
+        console.error("error", err)
+    })
+}
+
 // När användaren har hämtats, använd deras id för att hämta deras inlägg från https://jsonplaceholder.typicode.com/posts?userId=1.
 // Använd callbacks inom .then()-kedjan för att hantera resultaten och logga dem i konsolen.
 
