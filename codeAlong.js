@@ -67,7 +67,7 @@ firstTask((result1) => {
     });
   });
 });
-(
+
 // ---------------------------------------------
 // ---------------------------------------------
 // ---------------------------------------------
@@ -77,15 +77,14 @@ firstTask((result1) => {
 // Vi ska tillsammans skapa en funktion som hämtar data från en API med hjälp av fetch() och använder callbacks för att hantera asynkroniteten.
 console.log("start")
 
-function fetchData(url,callback) {
-
+function getData(url, callback) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
       callback(null, data)
     })
     .catch(err => {
-        callback(err,null)
+        callback(err, null)
     })
 }
 

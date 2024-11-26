@@ -1,10 +1,18 @@
+console.log("JavaScript loaded correctly")
 // Övning 1: Enkel Asynkron Funktion med Callback (Lätt)
 
 // Uppgift:
 // Skapa en funktion delayLog som tar en sträng och en tid i millisekunder som argument.
 // Funktionen ska använda setTimeout för att logga strängen efter den angivna tiden.
 // Använd en callback för att meddela när loggningen är klar.
+let stringToDisplay = "Denna sträng ska visas"
 
+function delayLog(stringToDisplay){
+    setTimeout(() => {
+        callback(`${stringToDisplay}, visas nu 2 sekunder efter initieringen`)
+    }, 2000)
+}
+delayLog()
 // Mål:
 // Förstå hur man använder callbacks med setTimeout.
 // Praktisera enkel asynkronitet.
@@ -42,3 +50,30 @@
 // Applicera kunskaperna i en faktisk applikation.
 // Förstå hur asynkronitet påverkar DOM-manipulation.
 // ------------------------------------------
+
+
+// const fetchPromise = 
+// fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+//   );
+  
+//   console.log(fetchPromise);
+  
+//   fetchPromise.then((response) => {
+//     const jsonPromise = response.json();
+//     jsonPromise.then((data) => {
+//         console.log(data[0].name)
+//     })
+//   });
+  
+//   console.log("Started request…");
+
+
+// const secondFetchPromise = fetch(
+//     "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+// );
+
+// secondFetchPromise
+// .then((response)=> response.json())
+// .then((data) => {
+//     console.log(data[1].name);
+// });
